@@ -1,10 +1,10 @@
-package umc.spring.domain;
+package javalab.umc7th_mission.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import umc.spring.domain.enums.Gender;
-import umc.spring.domain.enums.MemberStatus;
-import umc.spring.domain.enums.SocialType;
+import javalab.umc7th_mission.domain.enums.Gender;
+import javalab.umc7th_mission.domain.enums.MemberStatus;
+import javalab.umc7th_mission.domain.enums.SocialType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

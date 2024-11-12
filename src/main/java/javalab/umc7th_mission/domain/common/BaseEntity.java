@@ -1,4 +1,4 @@
-package umc.spring.domain.common;
+package javalab.umc7th_mission.domain.common;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

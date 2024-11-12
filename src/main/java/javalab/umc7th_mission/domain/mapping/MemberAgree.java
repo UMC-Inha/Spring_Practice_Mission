@@ -1,10 +1,10 @@
-package umc.spring.domain.mapping;
+package javalab.umc7th_mission.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.Member;
-import umc.spring.domain.Terms;
-import umc.spring.domain.common.BaseEntity;
+import javalab.umc7th_mission.domain.Member;
+import javalab.umc7th_mission.domain.Terms;
+import javalab.umc7th_mission.domain.common.BaseEntity;
 
 @Entity
 @Getter

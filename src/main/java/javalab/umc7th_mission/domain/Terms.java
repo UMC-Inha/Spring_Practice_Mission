@@ -1,7 +1,7 @@
-package umc.spring.domain;
+package javalab.umc7th_mission.domain;
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.mapping.MemberAgree;
+import javalab.umc7th_mission.domain.mapping.MemberAgree;
 
 import java.util.ArrayList;
 import java.util.List;

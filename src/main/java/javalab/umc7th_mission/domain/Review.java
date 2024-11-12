@@ -1,4 +1,4 @@
-package umc.spring.domain;
+package javalab.umc7th_mission.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
