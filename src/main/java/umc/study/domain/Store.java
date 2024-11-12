@@ -26,4 +26,13 @@ public class Store extends BaseEntity {
 
     @Column(columnDefinition = "VARCHAR(50)", nullable = false)
     private String state;
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

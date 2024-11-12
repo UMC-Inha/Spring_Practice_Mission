@@ -49,6 +49,20 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "memberId", cascade = CascadeType.ALL)
     private List<MemberAgree> memberAgreeList = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", socialType=" + socialType +
+                ", birth=" + birth +
+                ", foodCategory=" + foodCategory +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
+
     // @Builder 어노테이션과 명시적 생성자 사용
     @Builder
     public Member(Gender gender, SocialType socialType, String name, LocalDateTime birth, Long foodCategory,

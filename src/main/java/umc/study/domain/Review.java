@@ -30,6 +30,16 @@ public class Review extends BaseEntity {
     @OneToMany(mappedBy = "reviewId", cascade = CascadeType.ALL)
     private List<ReviewImage> reviewImageList = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", score=" + score +
+                ", content='" + content + '\'' +
+                ", reviewImageList=" + reviewImageList +
+                '}';
+    }
+
     @Builder
     public Review(Member memberId, Store storeId, Long score, String content, List<ReviewImage> reviewImageList) {
         this.memberId = memberId;
