@@ -28,6 +28,8 @@ public class Store extends BaseEntity {
     @ColumnDefault("0")
     private Integer rating;
 
+    @Column(nullable = false)
+    private String address;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Mission> missions = new ArrayList<>();

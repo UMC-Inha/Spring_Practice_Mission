@@ -1,7 +1,7 @@
 package study.domian.mission;
 
 public enum Status {
-    COMPELTE,
-    NOCOMPELTE,
+    COMPLETE,
+    NOCOMPLETE,
     ING
 }

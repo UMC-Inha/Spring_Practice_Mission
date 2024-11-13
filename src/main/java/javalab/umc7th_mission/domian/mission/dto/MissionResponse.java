@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MissionRequest {
+public class MissionResponse {
 
     public class MissionStatusDto {
 
