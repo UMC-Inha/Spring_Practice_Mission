@@ -10,8 +10,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import study.domian.mission.dto.MissionRequest.MissionRegoinDTO;
-import study.domian.mission.dto.MissionRequest.MissionStatusDto;
+import study.domian.mission.Status;
+import study.domian.mission.dto.MissionResponse.*;
+
 
 @RequiredArgsConstructor
 @Repository
@@ -33,7 +34,7 @@ public class MissionCustomRepositoryImpl implements MissionCustomRepository{
             .on(mission.id.eq(memberMission.mission.id))
             .where(
                 memberMission.member.id.eq(userId)
-                    .and(memberMission.status.in(1, 2)) // state가 1 또는 2인 경우 필터링
+                    .and(memberMission.status.in(Status.ING,Status.COMPLETE))
             )
             .orderBy(memberMission.status.asc(), mission.id.asc())
             .limit(limit)
@@ -42,7 +43,7 @@ public class MissionCustomRepositoryImpl implements MissionCustomRepository{
     }
 
     @Override
-    public List<MissionRegoinDTO> findMissionByRegoin(Long userId, int limit, int offset) {
+    public List<MissionRegoinDTO> findMissionByRegoin(Long userId,String addressName, int limit, int offset) {
         return jpaQueryFactory
             .select(Projections.constructor(MissionRegoinDTO.class,
                 mission.id,
@@ -53,8 +54,10 @@ public class MissionCustomRepositoryImpl implements MissionCustomRepository{
             ))
             .from(mission)
             .join(mission.store, store)
-            .where(mission.status.eq("possible")
-                .and(store.address.eq(address)))
+            .join(mission.memberMissions, memberMission) // memberMissions 컬렉션과 JOIN
+            .where(memberMission.member.id.eq(userId)  // 특정 회원의 미션
+                .and(memberMission.status.eq(Status.NOCOMPLETE))  // 상태 필터링
+                .and(store.address.eq(addressName)))
             .orderBy(mission.id.asc())
             .limit(10)
             .fetch();
