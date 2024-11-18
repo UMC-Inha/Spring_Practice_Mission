@@ -18,20 +18,4 @@ public class Umc7thMissionApplication {
 		SpringApplication.run(Umc7thMissionApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner run(ApplicationContext context) {
-		return args -> {
-			StoreQueryService storeQueryService = context.getBean(StoreQueryService.class);
-
-			String name = "요아정";
-			BigDecimal score = BigDecimal.valueOf(4.0);
-
-			System.out.println("Executing findStoresByNameAndScore with parameters:");
-			System.out.println("Name: " + name);
-			System.out.println("Score: " + score);
-
-			storeQueryService.findStoresByNameAndScore(name, score)
-					.forEach(System.out::println);
-		};
-	}
 }

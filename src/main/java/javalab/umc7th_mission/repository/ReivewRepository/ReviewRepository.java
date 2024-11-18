@@ -9,11 +9,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Transactional
-    @Query("INSERT INTO Review  " +
-            "VALUES (:memberId, :storeId, :body, :score)")
-    void insertReview(@Param("memberId") Long memberId,
-                      @Param("storeId") Long storeId,
-                      @Param("body") String body,
-                      @Param("score") int score);
 }

@@ -8,7 +8,7 @@ import javalab.umc7th_mission.domain.enums.SocialType;
 import javalab.umc7th_mission.domain.mapping.MemberAgree;
 import javalab.umc7th_mission.domain.mapping.MemberPrefer;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@DynamicUpdate
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
