@@ -1,5 +1,6 @@
 package javalab.umc7th_mission.domain;
 import jakarta.persistence.*;
+import javalab.umc7th_mission.domain.common.BaseEntity;
 import javalab.umc7th_mission.domain.mapping.StoreAddress;
 import javalab.umc7th_mission.domain.mapping.StoreCategory;
 import lombok.*;
@@ -15,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Store {
+//24.11.20 BaseEntity 놓친거 추가
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

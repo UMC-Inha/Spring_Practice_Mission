@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +64,26 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity onThrowException(GeneralException generalException, HttpServletRequest request) {
         ErrorReasonDTO errorReasonHttpStatus = generalException.getErrorReasonHttpStatus();
         return handleExceptionInternal(generalException,errorReasonHttpStatus,null,request);
+    }
+
+    //FoodCatoryNotFoundException에 대한 에러 처리
+    @ExceptionHandler(FoodCategoryNotFoundException.class)
+    public ResponseEntity<Object> handleFoodCategoryNotFoundException(FoodCategoryNotFoundException e, HttpServletRequest request) {
+        WebRequest webRequest = new ServletWebRequest(request);
+
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus.FOOD_CATEGORY_NOT_FOUND.getCode(),
+                ErrorStatus.FOOD_CATEGORY_NOT_FOUND.getMessage(),
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                new HttpHeaders(),
+                ErrorStatus.FOOD_CATEGORY_NOT_FOUND.getHttpStatus(),
+                webRequest
+        );
     }
 
     private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorReasonDTO reason,
