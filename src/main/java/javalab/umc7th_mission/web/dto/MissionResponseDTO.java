@@ -13,7 +13,7 @@ public class MissionResponseDTO {
         }
 
         // 명시적 Getter (Jackson 직렬화를 위해 필요)
-        public Long getReviewId() {
+        public Long getMissionId() {
             return missionId;
         }
 
