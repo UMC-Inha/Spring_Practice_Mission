@@ -86,6 +86,26 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         );
     }
 
+    //RegionNotFoundException에 대한 에러 처리
+    @ExceptionHandler(RegionNotFoundException.class)
+    public ResponseEntity<Object> handleRegionNotFoundException(RegionNotFoundException e, HttpServletRequest request) {
+        WebRequest webRequest = new ServletWebRequest(request);
+
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus.REGION_NOT_FOUND.getCode(),
+                ErrorStatus.REGION_NOT_FOUND.getMessage(),
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                new HttpHeaders(),
+                ErrorStatus.REGION_NOT_FOUND.getHttpStatus(),
+                webRequest
+        );
+    }
+
     private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorReasonDTO reason,
                                                            HttpHeaders headers, HttpServletRequest request) {
 
