@@ -3,12 +3,12 @@ package javalab.umc7th_mission.service.MemberService;
 import jakarta.transaction.Transactional;
 import javalab.umc7th_mission.apiPayload.code.status.ErrorStatus;
 import javalab.umc7th_mission.apiPayload.exception.FoodCategoryNotFoundException;
+import javalab.umc7th_mission.apiPayload.exception.RegionNotFoundException;
 import javalab.umc7th_mission.converter.MemberConverter;
 import javalab.umc7th_mission.converter.MemberPreferConverter;
 import javalab.umc7th_mission.domain.FoodCategory;
 import javalab.umc7th_mission.domain.Member;
 import javalab.umc7th_mission.domain.Region;
-import javalab.umc7th_mission.domain.enums.Gender;
 import javalab.umc7th_mission.domain.mapping.MemberAddress;
 import javalab.umc7th_mission.domain.mapping.MemberPrefer;
 import javalab.umc7th_mission.repository.FoodCategoryRepository.FoodCategoryRepository;
@@ -36,15 +36,13 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Override
     @Transactional //트렌잭션 어노테이션
     public Member joinMember(MemberRequestDTO.JoinDto request) {
-        //후에 지역을 다 추가하고 해당 지역이 있는지 확인 api필요해보임
         Region region = regionRepository.findByName(request.getRegion());
+        if (region == null) {
+            throw new RegionNotFoundException(ErrorStatus.REGION_NOT_FOUND);
+        }
 
         //member 생성 및 저장
         Member newMember = MemberConverter.toMember(request);
-
-        if (newMember.getAddressList() == null) {
-            newMember.setAddressList(new ArrayList<>());
-        }
         //foodCategory list 조회
         List<FoodCategory> foodCategoryList = request.getPreferCategory().stream()
                 .map(category -> {
@@ -56,10 +54,13 @@ public class MemberCommandServiceImpl implements MemberCommandService {
         memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
         newMember.setMemberPreferList(memberPreferList);
 
+        //24.11.21 fix/#7
         //memberAddress 생성 및 연결
         MemberAddress memberAddress = MemberConverter.toMemberAddress(newMember, region, request);
+
+
         memberAddress.setMember(newMember);
-        newMember.getAddressList().add(memberAddress);
+        newMember.setAddress(memberAddress);
 
         memberAddressRepository.save(memberAddress);
 

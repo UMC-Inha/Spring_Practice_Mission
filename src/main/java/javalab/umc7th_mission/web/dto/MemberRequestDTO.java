@@ -36,34 +36,31 @@ public class MemberRequestDTO {
         @Size(max = 50, message = "이메일은 최대 50자까지 가능합니다.")
         private final String email;
 
-        //어노테이션 추가 필요 지역 관련 이슈
+        //24.11.21 fix/#7
+        @NotBlank(message = "지역명은 필수 항목입니다.")
+        @Size(max = 50, message = "지역명은 최대 50자까지 가능합니다.")
         private final String region;
+
+        @NotBlank(message = "세부 주소는 필수 항목입니다.")
+        @Size(max = 100, message = "세부 주소는 최대 100자까지 가능합니다.")
         private final String detailedAddress;
+
+        @NotBlank(message = "우편번호는 필수 항목입니다.")
+        @Size(max = 40, message = "우편번호는 최대 40자까지 가능합니다.")
         private final String zipcode;
+
         List<Long> preferCategory;
 
+        /*
+            24.11.21 fix/#7 -> remove @
+            유효성 검증은 객체 생성 이후에 처리되도록 설계 -> 생성자에서 어노테이션을 적용할 이유 없음
+         */
         public JoinDto(
-            @NotBlank(message = "이름은 필수 항목입니다.")
-            @Size(max = 20, message = "이름은 최대 20자까지 가능합니다.")
             String name,
-
-            @NotBlank(message = "닉네임은 필수 항목입니다.")
-            @Size(max = 20, message = "닉네임은 최대 20자까지 가능합니다.")
             String nickname,
-
-            @NotBlank(message = "전화번호는 필수 항목입니다.")
-            //전화번호 형식 검증 정규식
-            @Pattern(regexp = "^(02|0\\d{2})-\\d{3,4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다.")
             String phoneNumber,
-
-            @NotNull(message = "성별은 필수 항목입니다.")
             Gender gender,
-
-            @NotBlank(message = "이메일은 필수 항목입니다.")
-            @Email(message = "이메일 형식이 올바르지 않습니다.")
-            @Size(max = 50, message = "이메일은 최대 50자까지 가능합니다.")
             String email,
-
             String region,
             String detailedAddress,
             String zipcode,
