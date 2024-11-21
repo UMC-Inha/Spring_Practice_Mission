@@ -3,7 +3,7 @@ package javalab.umc7th_mission.web.controller;
 import javalab.global.apiPayload.ApiResponse;
 import javalab.umc7th_mission.converter.TempConverter;
 import javalab.umc7th_mission.service.TempQueryService;
-import javalab.umc7th_mission.web.dto.TempResponse;
+import javalab.umc7th_mission.web.dto.response.TempResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
