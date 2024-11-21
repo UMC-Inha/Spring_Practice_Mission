@@ -78,7 +78,7 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
                 .from(memberMission)
                 .join(memberMission.mission, mission)
                 .join(mission.store, store)
-                .join(store.addressList, storeAddress)
+                .join(store.address, storeAddress)
                 .where(
                         memberMission.member.id.eq(memberId),
                         memberMission.status.eq(MissionStatus.COMPLETE),
