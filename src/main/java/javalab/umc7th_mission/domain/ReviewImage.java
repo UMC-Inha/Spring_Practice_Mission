@@ -1,5 +1,6 @@
 package javalab.umc7th_mission.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import javalab.umc7th_mission.domain.common.BaseEntity;
 import lombok.*;
@@ -26,5 +27,6 @@ public class ReviewImage extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
+    @JsonIgnore //순환참조 방지
     private Review review;
 }

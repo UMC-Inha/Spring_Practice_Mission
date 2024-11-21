@@ -1,4 +1,4 @@
-package javalab.umc7th_mission.service.StoreService;
+package javalab.umc7th_mission.service.StoreCommandService;
 
 import jakarta.transaction.Transactional;
 import javalab.umc7th_mission.apiPayload.code.status.ErrorStatus;
