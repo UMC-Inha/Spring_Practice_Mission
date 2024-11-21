@@ -3,6 +3,7 @@ package javalab.umc7th_mission.web.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import javalab.umc7th_mission.validation.annotation.ExistCategories;
 import lombok.Getter;
 
 import java.util.List;
@@ -43,6 +44,8 @@ public class StoreRequestDTO {
         private final String region;
         private final String detailedAddress;
         private final String zipcode;
+
+        @ExistCategories
         private final List<Long> storeCategory;
 
         public AddDto(

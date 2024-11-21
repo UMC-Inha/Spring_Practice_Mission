@@ -2,6 +2,7 @@ package javalab.umc7th_mission.web.dto;
 
 import jakarta.validation.constraints.*;
 import javalab.umc7th_mission.domain.enums.Gender;
+import javalab.umc7th_mission.validation.annotation.ExistCategories;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,6 +50,7 @@ public class MemberRequestDTO {
         @Size(max = 40, message = "우편번호는 최대 40자까지 가능합니다.")
         private final String zipcode;
 
+        @ExistCategories
         List<Long> preferCategory;
 
         /*
