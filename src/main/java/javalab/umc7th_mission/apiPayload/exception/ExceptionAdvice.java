@@ -106,6 +106,45 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         );
     }
 
+    @ExceptionHandler(MissionNotFoundException.class)
+    public ResponseEntity<Object> handleMissionNotFoundException(MissionNotFoundException e, HttpServletRequest request) {
+        WebRequest webRequest = new ServletWebRequest(request);
+
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus.MISSION_NOT_FOUND.getCode(),
+                ErrorStatus.MISSION_NOT_FOUND.getMessage(),
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                new HttpHeaders(),
+                ErrorStatus.MISSION_NOT_FOUND.getHttpStatus(),
+                webRequest
+        );
+    }
+
+
+    @ExceptionHandler(MissionAlreadyInProgressException.class)
+    public ResponseEntity<Object> handleMissionAlreadyInProgressException(MissionAlreadyInProgressException e, HttpServletRequest request) {
+        WebRequest webRequest = new ServletWebRequest(request);
+
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus.MISSION_ALREADY_IN_PROGRESS.getCode(),
+                ErrorStatus.MISSION_ALREADY_IN_PROGRESS.getMessage(),
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                new HttpHeaders(),
+                ErrorStatus.MISSION_ALREADY_IN_PROGRESS.getHttpStatus(),
+                webRequest
+        );
+    }
+
     @ExceptionHandler(MemberNotFoundException.class)
     public ResponseEntity<Object> handleMemberNotFoundException(MemberNotFoundException e, HttpServletRequest request) {
         WebRequest webRequest = new ServletWebRequest(request);

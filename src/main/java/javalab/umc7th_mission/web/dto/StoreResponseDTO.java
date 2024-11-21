@@ -13,7 +13,7 @@ public class StoreResponseDTO {
         }
 
         // 명시적 Getter (Jackson 직렬화를 위해 필요)
-        public Long getMemberId() {
+        public Long getStoreId() {
             return storeId;
         }
 
