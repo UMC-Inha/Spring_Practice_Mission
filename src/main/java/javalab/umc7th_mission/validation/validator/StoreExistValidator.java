@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
-    StoreValidationService storeValidationService;
+    private final StoreValidationService storeValidationService;
 
     @Override
     public void initialize(ExistStore constraintAnnotation) {
@@ -21,8 +21,12 @@ public class StoreExistValidator implements ConstraintValidator<ExistStore, Long
     }
 
     @Override
-    public boolean isValid(Long value, ConstraintValidatorContext context) {
-        boolean isValid = storeValidationService.isStoreExist(value);
+    public boolean isValid(Long storeId, ConstraintValidatorContext context) {
+        if (storeId == null) {
+            return false;
+        }
+
+        boolean isValid = storeValidationService.isStoreExist(storeId);
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
