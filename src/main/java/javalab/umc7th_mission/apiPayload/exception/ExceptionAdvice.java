@@ -106,6 +106,44 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         );
     }
 
+    @ExceptionHandler(MemberNotFoundException.class)
+    public ResponseEntity<Object> handleMemberNotFoundException(MemberNotFoundException e, HttpServletRequest request) {
+        WebRequest webRequest = new ServletWebRequest(request);
+
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus.MEMBER_NOT_FOUND.getCode(),
+                ErrorStatus.MEMBER_NOT_FOUND.getMessage(),
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                new HttpHeaders(),
+                ErrorStatus.MEMBER_NOT_FOUND.getHttpStatus(),
+                webRequest
+        );
+    }
+
+    @ExceptionHandler(StoreNotFoundException.class)
+    public ResponseEntity<Object> handleStoreNotFoundException(StoreNotFoundException e, HttpServletRequest request) {
+        WebRequest webRequest = new ServletWebRequest(request);
+
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus.STORE_NOT_FOUND.getCode(),
+                ErrorStatus.STORE_NOT_FOUND.getMessage(),
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                new HttpHeaders(),
+                ErrorStatus.STORE_NOT_FOUND.getHttpStatus(),
+                webRequest
+        );
+    }
+
     private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorReasonDTO reason,
                                                            HttpHeaders headers, HttpServletRequest request) {
 

@@ -1,4 +1,4 @@
-package javalab.umc7th_mission.service.StoreService;
+package javalab.umc7th_mission.service.StoreCommandService;
 
 import javalab.umc7th_mission.domain.Store;
 import javalab.umc7th_mission.web.dto.StoreRequestDTO;

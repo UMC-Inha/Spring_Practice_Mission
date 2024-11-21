@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import javalab.umc7th_mission.apiPayload.ApiResponse;
 import javalab.umc7th_mission.converter.StoreConverter;
 import javalab.umc7th_mission.domain.Store;
-import javalab.umc7th_mission.service.StoreService.StoreCommandService;
+import javalab.umc7th_mission.service.StoreCommandService.StoreCommandService;
 import javalab.umc7th_mission.web.dto.StoreRequestDTO;
 import javalab.umc7th_mission.web.dto.StoreResponseDTO;
 import lombok.RequiredArgsConstructor;
