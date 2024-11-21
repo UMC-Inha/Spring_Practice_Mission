@@ -20,7 +20,7 @@ public class Review extends BaseEntity {
     @Column(nullable = false)
     private Integer score;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable =false, columnDefinition = "TEXT")
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -10,6 +10,9 @@ import javalab.umc7th_mission.study.domain.mapping.MemberFood;
 import javalab.umc7th_mission.study.domain.mapping.MemberMission;
 import javalab.umc7th_mission.study.domain.mapping.MemberQuestion;
 import javalab.umc7th_mission.study.domain.mapping.MemberTerm;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@DynamicUpdate
+@DynamicInsert
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -42,7 +47,7 @@ public class Member extends BaseEntity {
     @Column(nullable = true, length = 15)
     private String phoneNumber;
 
-    @Column(nullable = false)
+    @ColumnDefault("0")
     private Integer point;
 
     @Enumerated(EnumType.STRING)
@@ -50,7 +55,7 @@ public class Member extends BaseEntity {
     private Role role;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(10)")
+    @Column(columnDefinition = "VARCHAR(10) DEFAULT 'ACTIVE'")
     private MemberStatus status;
 
     @Column(nullable = true)

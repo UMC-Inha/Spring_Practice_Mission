@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class RestaurantQueryServiceImpl implements RestaurantQueryService{
+public class RestaurantValidationServiceImpl implements RestaurantValidationService {
     private final RestaurantRepository restaurantRepository;
 
     @Override
