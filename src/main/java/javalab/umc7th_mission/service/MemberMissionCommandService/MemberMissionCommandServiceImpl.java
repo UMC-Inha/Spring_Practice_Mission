@@ -42,5 +42,4 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
         return memberMissionRepository.existsByMemberIdAndMissionIdAndStatus(memberId, missionId, MissionStatus.CHALLENGING);
     }
 
-
 }

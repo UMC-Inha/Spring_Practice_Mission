@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MissionNotInProgress {
-    String message() default "해당 ";
+    String message() default "해당 하는 미션이 이미 진행중입니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

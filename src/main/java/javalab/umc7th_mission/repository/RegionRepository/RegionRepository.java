@@ -10,4 +10,3 @@ public interface RegionRepository extends JpaRepository<Region, Long> {
     // 추가로 지역 이름으로 검색할 수 있는 메서드
     Region findByName(String name);
 }
-
