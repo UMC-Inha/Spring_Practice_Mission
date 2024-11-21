@@ -2,6 +2,7 @@ package javalab.umc7th_mission.web.dto;
 
 import jakarta.validation.constraints.*;
 import javalab.umc7th_mission.domain.ReviewImage;
+import javalab.umc7th_mission.validation.annotation.ExistStore;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ public class ReviewRequestDTO {
 
     @Getter
     public static class AddDTO {
-        @NotNull(message = "가게 ID는 필수입니다.")
+        @ExistStore
         private final Long storeId;
 
         @NotNull(message = "회원 ID는 필수입니다.")
