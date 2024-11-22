@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/umc_study
+    username: root
+    password: sw051621!!
+  sql: #      데이터베이스 초기화 전략 지정
+    init:
+      mode: never # DB 초기화 하지 않음(APP 실행 시 기존 DB 구조나 데이터에 대해 변경 X)
+  jpa:
+    properties:
+      hibernate: # DB와 상호작용을 위한 ORM 프레임워크
+        dialect: org.hibernate.dialect.MySQL8Dialect # hibernate에서 SQL문을 생성할 때 사용할 DB 방언 지정
+        show_sql: true # 실행되는 SQL문을 콘솔에 출력
+        format_sql: true #  SQL문을 가독성 있게 포맷해서 출력
+        use_sql_comments: true # SQL 쿼리에 주석을 추가
+        hbm2ddl:
+          auto: update # 데이터베이스 스키마 자동 생성 및 업데이트 전략 설정
+        default_batch_fetch_size: 1000 # 배치 크기
