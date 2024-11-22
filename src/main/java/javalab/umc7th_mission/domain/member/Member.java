@@ -10,10 +10,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import java.time.LocalDate;
+import javalab.umc7th_mission.domain.common.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.umcjpaproject.domain.common.BaseEntity;
 
 @Getter
 @Entity

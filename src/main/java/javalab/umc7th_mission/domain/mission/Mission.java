@@ -11,12 +11,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import javalab.umc7th_mission.domain.common.BaseEntity;
+import javalab.umc7th_mission.domain.store.Store;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.umcjpaproject.domain.common.BaseEntity;
-import umc.umcjpaproject.domain.store.Store;
 
 @Entity
 @Getter

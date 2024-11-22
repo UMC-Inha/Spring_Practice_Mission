@@ -9,13 +9,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import javalab.umc7th_mission.domain.common.BaseEntity;
+import javalab.umc7th_mission.domain.foodcategory.FoodCategory;
+import javalab.umc7th_mission.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.umcjpaproject.domain.common.BaseEntity;
-import umc.umcjpaproject.domain.foodcategory.FoodCategory;
-import umc.umcjpaproject.domain.member.Member;
 
 @Entity
 @Getter

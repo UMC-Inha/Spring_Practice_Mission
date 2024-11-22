@@ -10,13 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import javalab.umc7th_mission.domain.common.BaseEntity;
+import javalab.umc7th_mission.domain.member.Member;
+import javalab.umc7th_mission.domain.store.Store;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.umcjpaproject.domain.common.BaseEntity;
-import umc.umcjpaproject.domain.member.Member;
-import umc.umcjpaproject.domain.store.Store;
 
 @Entity
 @Getter
