@@ -2,13 +2,11 @@ package javalab.umc7th_mission.domain;
 
 import jakarta.persistence.*;
 import javalab.global.entity.BaseEntity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Mission extends BaseEntity {

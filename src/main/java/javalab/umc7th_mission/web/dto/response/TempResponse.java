@@ -1,4 +1,4 @@
-package javalab.umc7th_mission.web.dto;
+package javalab.umc7th_mission.web.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

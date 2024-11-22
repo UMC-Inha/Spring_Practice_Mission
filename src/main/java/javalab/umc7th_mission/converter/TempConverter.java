@@ -1,6 +1,6 @@
 package javalab.umc7th_mission.converter;
 
-import javalab.umc7th_mission.web.dto.TempResponse;
+import javalab.umc7th_mission.web.dto.response.TempResponse;
 
 public class TempConverter {
 
