@@ -1,4 +1,4 @@
-package study.domian.common;
+package javalab.umc7th_mission.domian.common;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

@@ -3,10 +3,11 @@ package javalab.umc7th_mission.apipayload;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import javalab.umc7th_mission.apipayload.code.BaseCode;
+import javalab.umc7th_mission.apipayload.code.status.SuccessStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import study.apipayload.code.BaseCode;
-import study.apipayload.code.code.SuccessStatus;
+
 
 @Getter
 @AllArgsConstructor

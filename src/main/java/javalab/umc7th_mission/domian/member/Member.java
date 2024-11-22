@@ -1,62 +1,83 @@
-package study.domian.member;
+package javalab.umc7th_mission.domian.member;
 
-
-import static jakarta.persistence.GenerationType.IDENTITY;
-
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import javalab.umc7th_mission.domian.review.Review;
+import javalab.umc7th_mission.domian.common.BaseEntity;
+import javalab.umc7th_mission.domian.enums.Gender;
+import javalab.umc7th_mission.domian.enums.MemberStatus;
+import javalab.umc7th_mission.domian.enums.SocialType;
+import javalab.umc7th_mission.domian.memberagree.MemberAgree;
+import javalab.umc7th_mission.domian.membermission.MemberMission;
+import javalab.umc7th_mission.domian.memberprefer.MemberPrefer;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import study.domian.common.BaseEntity;
-import study.domian.mapping.MemberCategory;
-import study.domian.mapping.MemberMission;
-
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
+@DynamicUpdate
+@DynamicInsert
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Member extends BaseEntity {
-    /*
-        `id`bigint	NOT NULL,
-        `region_id`	bigint	NOT NULL,
-        `email`	VARCHAR(30)	NULL,
-        `name`	varchar(20)	NULL,
-        `gender`	enum	NULL	COMMENT 'MALE, FEMALE',
-        `point_value`	int	NULL,
-        `birth_day`	date	NULL,
-        `address`	varchar(20)	NULL,
-        `phone_number`	bigint	NULL
-     */
+
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
-
+    @Column(nullable = false, length = 20)
     private String name;
 
-    private Gender gender;
-
-    private Integer pointValue;
-
-    private String birthDay;
-
+    @Column(nullable = false, length = 40)
     private String address;
 
-    private Integer phoneNumber;
+    @Column(nullable = false, length = 40)
+    private String specAddress;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<MemberMission> memberMissions = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(10)")
+    private Gender gender;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<MemberCategory> memberCategorys = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private SocialType socialType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
+    private MemberStatus status;
+
+    private LocalDate inactiveDate;
+
+    @Column(length = 50)
+    private String email;
+
+    @ColumnDefault("0")
+    private Integer point;
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberAgree> memberAgreeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberPrefer> memberPreferList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Review> reviewList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberMission> memberMissionList = new ArrayList<>();
 }

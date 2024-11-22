@@ -1,39 +1,61 @@
-package study.domian.store;
+package javalab.umc7th_mission.domian.store;
 
-
-import static jakarta.persistence.GenerationType.IDENTITY;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
+import javalab.umc7th_mission.domian.mission.Mission;
+import javalab.umc7th_mission.domian.region.Region;
+import javalab.umc7th_mission.domian.review.Review;
+import javalab.umc7th_mission.domian.common.BaseEntity;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import java.util.*;
-import study.domian.common.BaseEntity;
-import study.domian.mission.Mission;
-import study.domian.review.Review;
+
 
 @Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@NoArgsConstructor
 public class Store extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 20)
     private String name;
 
-    @Column(nullable = false)
-    @ColumnDefault("0")
-    private Integer rating;
-
-    @Column(nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Mission> missions = new ArrayList<>();
+    private Float score;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Review> reviews = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    @OneToMany(mappedBy = "store")
+    private List<Mission> missionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store")
+    private List<Review> reviewList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
 }
