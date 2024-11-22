@@ -1,6 +1,7 @@
 package javalab.umc7th_mission.config.apipayload.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -24,6 +25,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler
+    public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
+        String errorMessage = e.getConstraintViolations().stream()
+                .map(constraintViolation -> constraintViolation.getMessage())
+                .findFirst()
+                .orElseThrow(
+                        () -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생")
+                );
+
+        return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage),
+                HttpHeaders.EMPTY, request);
+    }
+
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e,
             HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -42,6 +56,14 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternalArgs(e, HttpHeaders.EMPTY,
                 ErrorStatus.valueOf("_BAD_REQUEST"), request, errors);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> exception(Exception e, WebRequest request) {
+        log.error("exception:{}", e.getMessage());
+        return handleExceptionInternalFalse(e, ErrorStatus.INTERNAL_SERVER_ERROR,
+                HttpHeaders.EMPTY, ErrorStatus.INTERNAL_SERVER_ERROR.getHttpStatus(), request,
+                e.getMessage());
     }
 
     @ExceptionHandler(value = GeneralException.class)
@@ -109,4 +131,5 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 request
         );
     }
+
 }
