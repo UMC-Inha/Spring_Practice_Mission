@@ -23,8 +23,7 @@ public class StoreAddress extends BaseEntity {
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region region;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "address",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Store store;
 
     @Column(nullable = false, length = 100)

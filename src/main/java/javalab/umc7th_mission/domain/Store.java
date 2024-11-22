@@ -1,5 +1,6 @@
 package javalab.umc7th_mission.domain;
 import jakarta.persistence.*;
+import javalab.umc7th_mission.domain.common.BaseEntity;
 import javalab.umc7th_mission.domain.mapping.StoreAddress;
 import javalab.umc7th_mission.domain.mapping.StoreCategory;
 import lombok.*;
@@ -15,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Store {
+//24.11.20 BaseEntity 놓친거 추가
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +38,10 @@ public class Store {
     @Column(nullable = false, length = 255)
     private String closingHours;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<StoreAddress> addressList = new ArrayList<>();
+    //24.11.20 StoreAddress와의 관계 재설정!!
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private StoreAddress address;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<StoreCategory> categoryList = new ArrayList<>();

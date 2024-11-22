@@ -10,6 +10,7 @@ import javalab.umc7th_mission.domain.mapping.MemberPrefer;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Columns;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import java.util.List;
 
 @Entity
 @Getter
+//24.11.20 @Setter 추가
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -48,11 +51,15 @@ public class Member extends BaseEntity {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
+    //24.11.20 point = 0 -> @ColumDefault, api에서 null문제가 꾸준히 발생하여 변경함
     @Column(nullable = false)
-    private Integer point = 0;
+    @ColumnDefault("0")
+    private Integer point;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MemberAddress> addressList = new ArrayList<>();
+    //24.11.21 fix/#7
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private MemberAddress address;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MemberAgree> memberAgreeList = new ArrayList<>();

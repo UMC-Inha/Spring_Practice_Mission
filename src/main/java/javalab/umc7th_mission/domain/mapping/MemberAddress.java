@@ -23,8 +23,8 @@ public class MemberAddress extends BaseEntity {
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region region;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", referencedColumnName = "id")
+    //24.11.21 fix/#7
+    @OneToOne(mappedBy = "address",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Member member;
 
     @Column(nullable = false, length = 100)
