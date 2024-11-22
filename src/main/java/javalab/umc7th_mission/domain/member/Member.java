@@ -49,7 +49,7 @@ public class Member extends BaseEntity {
     @Enumerated(STRING)
     private SocialType socialType;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     private String email;
 
     private Integer point;
