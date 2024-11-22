@@ -14,10 +14,15 @@ import javalab.umc7th_mission.domain.common.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = PROTECTED)
+@DynamicUpdate
+@DynamicInsert
 public class Member extends BaseEntity {
 
     @Id
@@ -52,6 +57,7 @@ public class Member extends BaseEntity {
     @Column(length = 50)
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
 
     @Builder

@@ -44,15 +44,6 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 ErrorStatus.valueOf("_BAD_REQUEST"), request, errors);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<Object> exception(Exception e, WebRequest request) {
-        e.printStackTrace();
-
-        return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR,
-                HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(), request,
-                e.getMessage());
-    }
-
     @ExceptionHandler(value = GeneralException.class)
     public ResponseEntity onThrowException(GeneralException generalException,
             HttpServletRequest request) {
