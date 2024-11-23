@@ -1,6 +1,6 @@
 package javalab.umc7th_mission.converter;
 
-import javalab.umc7th_mission.web.dto.TempResponse;
+import javalab.umc7th_mission.web.dto.temp.TempResponse;
 
 public class TempConverter {
     // -> DTO로 만들기

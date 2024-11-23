@@ -16,8 +16,8 @@ import java.util.Optional;
 public class StoreQueryServiceImpl implements StoreQueryService {
     private final StoreRepository storeRepository;
     @Override
-    public Optional<Store> findStore(Long id) {
-        return storeRepository.findById(id);
+    public Store findStore(Long id) {
+        return storeRepository.findById(id).orElseThrow();
     }
 
     @Override

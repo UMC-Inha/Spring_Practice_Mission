@@ -24,6 +24,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath address = createString("address");
 
+    public final NumberPath<Integer> age = createNumber("age", Integer.class);
+
     public final StringPath email = createString("email");
 
     public final EnumPath<javalab.umc7th_mission.domain.enums.Gender> gender = createEnum("gender", javalab.umc7th_mission.domain.enums.Gender.class);

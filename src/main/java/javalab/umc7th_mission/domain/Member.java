@@ -8,6 +8,7 @@ import javalab.umc7th_mission.domain.enums.SocialType;
 import javalab.umc7th_mission.domain.mapping.MemberAgree;
 import javalab.umc7th_mission.domain.mapping.MemberPrefer;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
@@ -16,10 +17,11 @@ import java.util.List;
 
 @Entity
 @Getter
+@DynamicUpdate
+@DynamicInsert
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@DynamicUpdate
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,8 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false, length = 20)
     private String name;
+
+    private Integer age;
 
     @Column(length = 30)
     private String phoneNum;
@@ -51,7 +55,7 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 50)
+  //  @Column(nullable = false, length = 50)
     private String email;
 
     private Integer point;

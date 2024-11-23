@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StoreQueryService {
-    Optional<Store> findStore(Long id);
+    Store findStore(Long id);
     List<Store> findStoresByNameAndScore(String name, BigDecimal score);
 
 }
