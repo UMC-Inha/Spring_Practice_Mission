@@ -5,7 +5,6 @@ import javalab.umc7th_mission.study.apiPayload.exception.GeneralException;
 import javalab.umc7th_mission.study.converter.MemberMissionConverter;
 import javalab.umc7th_mission.study.domain.Member;
 import javalab.umc7th_mission.study.domain.Mission;
-import javalab.umc7th_mission.study.domain.enums.MissionStatus;
 import javalab.umc7th_mission.study.domain.mapping.MemberMission;
 import javalab.umc7th_mission.study.repository.MemberMissionRepository.MemberMissionRepository;
 import javalab.umc7th_mission.study.repository.MemberRepository.MemberRepository;
@@ -29,23 +28,20 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
        Mission mission = missionRepository.findById(Math.toIntExact(request.getMissionId()))
                .orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
 
-
-       if(isChallenging(request.getMemberId(), request.getMissionId())){
-            throw new GeneralException(ErrorStatus.MEMBER_MISSION_ALREADY_IN_CHALLENGING);
-       }
        MemberMission membermission = MemberMissionConverter.toMemberMission(member, mission);
+
+
 
        return memberMissionRepository.save(membermission);
    }
 
    @Override
-    public boolean isChallenging(Long memberId, Long missionId){
-       MemberMission memberMission = memberMissionRepository.findMemberMissionByMemberIdAndMissionId(memberId, missionId);
+    public boolean isExist(Long memberId, Long missionId){
+      MemberMission memberMission = memberMissionRepository.findMemberMissionByMemberIdAndMissionId(memberId, missionId);
 
-       if(memberMission != null && memberMission.getStatus().equals(MissionStatus.CHALLENGING)){
+       if(memberMission != null){
            return true;
        }
-
        return false;
    }
 }

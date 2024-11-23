@@ -5,6 +5,6 @@ import javalab.umc7th_mission.study.web.dto.member_mission.MemberMissionRequestD
 
 public interface MemberMissionCommandService {
     MemberMission AddMemberMission(MemberMissionRequestDTO.AddMemberMissionDto request);
-    boolean isChallenging(Long memberId, Long missionId);
+    boolean isExist(Long memberId, Long missionId);
 }
 
