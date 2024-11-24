@@ -1,5 +1,6 @@
 package javalab.umc7th_mission.study.repository.MemberMissionRepository;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import ext.javalab.umc7th_mission.study.domain.QMission;
 import ext.javalab.umc7th_mission.study.domain.QRegion;
@@ -53,4 +54,5 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
                 )
                 .fetchOne();
     }
+
 }

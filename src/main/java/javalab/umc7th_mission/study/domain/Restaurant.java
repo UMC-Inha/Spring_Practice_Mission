@@ -6,6 +6,8 @@ import javalab.umc7th_mission.study.domain.Mission;
 import javalab.umc7th_mission.study.domain.Review;
 import javalab.umc7th_mission.study.domain.enums.RestaurantStatus;
 import javalab.umc7th_mission.study.domain.common.BaseEntity;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@DynamicUpdate
+@DynamicInsert
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -31,7 +35,7 @@ public class Restaurant extends BaseEntity {
     private String address;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
+    @Column(columnDefinition = "VARCHAR(10) DEFAULT 'ACTIVE'")
     private RestaurantStatus status;
 
     private LocalDate inactiveDate;

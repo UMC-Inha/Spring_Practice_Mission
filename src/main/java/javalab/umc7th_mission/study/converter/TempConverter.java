@@ -1,6 +1,6 @@
 package javalab.umc7th_mission.study.converter;
 
-import javalab.umc7th_mission.study.dto.TempResponse;
+import javalab.umc7th_mission.study.web.dto.TempResponse;
 
 public class TempConverter {
     public static TempResponse.TempTestDTO toTempDTO(){
