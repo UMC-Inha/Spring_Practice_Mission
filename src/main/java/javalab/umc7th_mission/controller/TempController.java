@@ -1,4 +1,4 @@
-package umc.spring.controller;
+package javalab.umc7th_mission.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
