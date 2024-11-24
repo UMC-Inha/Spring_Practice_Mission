@@ -1,4 +1,4 @@
-package umc.spring.apiPayload.exception;
+package javalab.umc7th_mission.apiPayload.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
