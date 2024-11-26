@@ -2,11 +2,16 @@ package javalab.umc7th_mission.converter;
 
 import javalab.umc7th_mission.domain.Member;
 import javalab.umc7th_mission.domain.Region;
+import javalab.umc7th_mission.domain.Review;
 import javalab.umc7th_mission.domain.Store;
 import javalab.umc7th_mission.domain.mapping.StoreAddress;
 import javalab.umc7th_mission.web.dto.MemberRequestDTO;
 import javalab.umc7th_mission.web.dto.StoreRequestDTO;
 import javalab.umc7th_mission.web.dto.StoreResponseDTO;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StoreConverter {
 
@@ -34,5 +39,29 @@ public class StoreConverter {
                 .detailAddress(request.getDetailedAddress())
                 .zipCode(request.getZipcode())
                 .build();
+    }
+
+    //24.11.26 ReviewPreview 관련 Converter 추가
+    public static StoreResponseDTO.ReviewPreviewDTO reviewPreviewDTO(Review review) {
+        return new StoreResponseDTO.ReviewPreviewDTO(
+                review.getMember().getNickname(),
+                review.getRating(),
+                review.getContent(),
+                review.getCreatedAt().toLocalDate()
+        );
+    }
+
+    public static StoreResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO(Page<Review> reviewList) {
+        List<StoreResponseDTO.ReviewPreviewDTO> reviewPreviewDTOList = reviewList.stream()
+                .map(StoreConverter::reviewPreviewDTO).toList();
+
+        return new StoreResponseDTO.ReviewPreViewListDTO(
+                reviewPreviewDTOList,
+                reviewPreviewDTOList.size(),
+                reviewList.getTotalPages(),
+                reviewList.getTotalElements(),
+                reviewList.isFirst(),
+                reviewList.isLast()
+        );
     }
 }
