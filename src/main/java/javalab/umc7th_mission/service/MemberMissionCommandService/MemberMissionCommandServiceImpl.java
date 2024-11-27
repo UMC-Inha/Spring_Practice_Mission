@@ -12,6 +12,7 @@ import javalab.umc7th_mission.repository.MemberMissionRepository.MemberMissionRe
 import javalab.umc7th_mission.repository.MemberRepository.MemberRepository;
 import javalab.umc7th_mission.repository.MissionRepository.MissionRepository;
 import javalab.umc7th_mission.web.dto.MemberMissionRequestDTO;
+import javalab.umc7th_mission.web.dto.MemberMissionResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,22 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
     @Override
     public boolean isMissionInProgress(Long memberId, Long missionId) {
         return memberMissionRepository.existsByMemberIdAndMissionIdAndStatus(memberId, missionId, MissionStatus.CHALLENGING);
+    }
+
+    //24.11.27 Challenging -> Complete 서비스
+    @Override
+    public MemberMissionResponseDTO.CompleteMissionResponseDTO completeMission(Long memberId, Long missionId) {
+        MemberMission memberMission = memberMissionRepository.findByMemberIdAndMissionId(memberId, missionId)
+                .orElseThrow(() -> new MissionNotFoundException(ErrorStatus.MISSION_NOT_FOUND));
+
+        if(!memberMission.getStatus().equals(MissionStatus.CHALLENGING)) {
+            throw new MissionNotFoundException(ErrorStatus.MISSION_NOT_FOUND);
+        }
+
+        memberMission.complete();
+        memberMissionRepository.save(memberMission);
+
+        return MemberMissionConverter.toCompleteMissionResponseDTO(memberMission);
     }
 
 }

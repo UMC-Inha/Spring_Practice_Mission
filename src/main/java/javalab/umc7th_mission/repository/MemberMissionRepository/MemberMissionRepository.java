@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+
 @Repository
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long>, MemberMissionRepositoryCustom {
 
@@ -18,4 +21,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
             "WHERE mm.member.id = :memberId " +
             "AND mm.status = javalab.umc7th_mission.domain.enums.MissionStatus.CHALLENGING")
     Page<MemberMission> findChallengingMissionByMemberId(@Param("memberId") Long memberId, PageRequest request);
+
+    Optional<MemberMission> findByMemberIdAndMissionId(Long memberId, Long missionId);
 }
