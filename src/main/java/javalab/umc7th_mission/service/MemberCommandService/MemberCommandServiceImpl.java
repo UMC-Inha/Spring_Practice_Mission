@@ -1,4 +1,4 @@
-package javalab.umc7th_mission.service.MemberService;
+package javalab.umc7th_mission.service.MemberCommandService;
 
 import jakarta.transaction.Transactional;
 import javalab.umc7th_mission.apiPayload.code.status.ErrorStatus;
@@ -16,12 +16,9 @@ import javalab.umc7th_mission.repository.MemberAddressRepository.MemberAddressRe
 import javalab.umc7th_mission.repository.MemberRepository.MemberRepository;
 import javalab.umc7th_mission.repository.RegionRepository.RegionRepository;
 import javalab.umc7th_mission.web.dto.MemberRequestDTO;
-import javalab.umc7th_mission.web.dto.MemberResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

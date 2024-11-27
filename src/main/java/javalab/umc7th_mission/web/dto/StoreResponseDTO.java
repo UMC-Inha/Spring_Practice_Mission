@@ -1,7 +1,6 @@
 package javalab.umc7th_mission.web.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,7 +35,7 @@ public class StoreResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class ReviewPreViewListDTO {
+    public static class ReviewPreviewListDTO {
         List<ReviewPreviewDTO> reviewList;
         Integer listSize;
         Integer totalPage;
