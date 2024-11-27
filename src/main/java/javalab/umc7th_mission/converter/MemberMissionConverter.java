@@ -60,4 +60,13 @@ public class MemberMissionConverter {
                 .build();
 
     }
+
+    //24.11.27 completeMission 변환 로직 처리 메서드 추가
+    public static MemberMissionResponseDTO.CompleteMissionResponseDTO toCompleteMissionResponseDTO(MemberMission memberMission) {
+        return MemberMissionResponseDTO.CompleteMissionResponseDTO.builder()
+                .memberMissionId(memberMission.getId())
+                .missionName(memberMission.getMission().getName())
+                .missionStatus(memberMission.getStatus())
+                .build();
+    }
 }

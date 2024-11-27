@@ -1,6 +1,7 @@
 package javalab.umc7th_mission.web.dto;
 
 import javalab.umc7th_mission.domain.Mission;
+import javalab.umc7th_mission.domain.enums.MissionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,5 +51,15 @@ public class MemberMissionResponseDTO {
         Integer reward;
         LocalDate startDate;
         LocalDate endDate;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CompleteMissionResponseDTO{
+        Long memberMissionId;
+        String missionName;
+        MissionStatus missionStatus; //변경된 상태
     }
 }
