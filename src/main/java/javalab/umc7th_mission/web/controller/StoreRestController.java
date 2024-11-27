@@ -6,12 +6,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import javalab.umc7th_mission.apiPayload.ApiResponse;
+import javalab.umc7th_mission.converter.MissionConverter;
 import javalab.umc7th_mission.converter.StoreConverter;
+import javalab.umc7th_mission.domain.Mission;
 import javalab.umc7th_mission.domain.Review;
 import javalab.umc7th_mission.domain.Store;
+import javalab.umc7th_mission.service.MissionQueryService.MissionQueryService;
 import javalab.umc7th_mission.service.StoreQueryService.StoreQueryService;
 import javalab.umc7th_mission.service.StoreCommandService.StoreCommandService;
 import javalab.umc7th_mission.validation.annotation.ExistStore;
+import javalab.umc7th_mission.validation.annotation.PositivePage;
+import javalab.umc7th_mission.web.dto.MissionResponseDTO;
 import javalab.umc7th_mission.web.dto.StoreRequestDTO;
 import javalab.umc7th_mission.web.dto.StoreResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 public class StoreRestController {
     private final StoreCommandService storeCommandService;
     private final StoreQueryService storeQueryService;
+    private final MissionQueryService missionQueryService;
 
     @PostMapping("/")
     public ApiResponse<StoreResponseDTO.AddResultDTO> join(@RequestBody @Valid StoreRequestDTO.AddDto request){
@@ -44,10 +50,26 @@ public class StoreRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
 
     })
-    public ApiResponse<StoreResponseDTO.ReviewPreviewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") Integer page) {
+    public ApiResponse<StoreResponseDTO.ReviewPreviewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") @PositivePage Integer page) {
         //페이지 번호가 0번부터 오지 않고 1번부터 시작이라 변경함 Swagger 정상작동 확인
         Integer adjustedPage = page - 1;
         Page<Review> reviewList = storeQueryService.getReviewList(storeId, adjustedPage);
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(reviewList));
+    }
+
+    @GetMapping("{storeId}/missions")
+    @Operation(summary = "특정 가게의 미션 목록 조회 API", description = "특정 가게의 미션들의 목록을 조회하는 API이며, 페이징을 포함합니다. " +
+            "Query String으로 Page 번호를 주세요!")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "access 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+
+    })
+    public ApiResponse<MissionResponseDTO.MissionPreviewListDTO> getMissionList(@ExistStore @PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") @PositivePage Integer page) {
+        Integer adjustedPage = page - 1;
+        Page<Mission> missionList = missionQueryService.getMissions(storeId, adjustedPage);
+        return ApiResponse.onSuccess(MissionConverter.missionPreviewListDTO(missionList));
     }
 }
