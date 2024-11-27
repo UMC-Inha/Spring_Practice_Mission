@@ -1,17 +1,14 @@
 package javalab.umc7th_mission.converter;
 
-import javalab.umc7th_mission.domain.Member;
 import javalab.umc7th_mission.domain.Region;
 import javalab.umc7th_mission.domain.Review;
 import javalab.umc7th_mission.domain.Store;
 import javalab.umc7th_mission.domain.mapping.StoreAddress;
-import javalab.umc7th_mission.web.dto.MemberRequestDTO;
 import javalab.umc7th_mission.web.dto.StoreRequestDTO;
 import javalab.umc7th_mission.web.dto.StoreResponseDTO;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StoreConverter {
 
@@ -51,11 +48,11 @@ public class StoreConverter {
         );
     }
 
-    public static StoreResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO(Page<Review> reviewList) {
+    public static StoreResponseDTO.ReviewPreviewListDTO reviewPreViewListDTO(Page<Review> reviewList) {
         List<StoreResponseDTO.ReviewPreviewDTO> reviewPreviewDTOList = reviewList.stream()
                 .map(StoreConverter::reviewPreviewDTO).toList();
 
-        return new StoreResponseDTO.ReviewPreViewListDTO(
+        return new StoreResponseDTO.ReviewPreviewListDTO(
                 reviewPreviewDTOList,
                 reviewPreviewDTOList.size(),
                 reviewList.getTotalPages(),

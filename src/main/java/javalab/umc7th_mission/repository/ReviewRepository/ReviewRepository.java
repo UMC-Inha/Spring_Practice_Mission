@@ -41,4 +41,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Pageable 인터페이스의 구현체 중 하나로, JPA 리포지토리에서 페이징 처리를 수행할 때 사용된다.
      */
     Page<Review> findAllByStore(Store store, PageRequest pageRequest);
+    Page<Review> findByMemberId(Long memberId, Pageable pageable);
 }
