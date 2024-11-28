@@ -1,3 +1,4 @@
+package javalab.umc7th_mission.config;/*
 package javalab.umc7th_mission.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -16,4 +17,4 @@ public class QueryDSLConfig {
     JPAQueryFactory jpaQueryFactory() {
         return new JPAQueryFactory(entityManager);
     }
-}
+}*/
