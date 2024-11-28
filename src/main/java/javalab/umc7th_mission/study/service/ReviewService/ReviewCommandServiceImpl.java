@@ -11,6 +11,9 @@ import javalab.umc7th_mission.study.repository.RestaurantRepository.RestaurantRe
 import javalab.umc7th_mission.study.repository.ReviewRepository.ReviewRepository;
 import javalab.umc7th_mission.study.web.dto.review.ReviewRequestDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,5 +34,21 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
         Review  newReview = ReviewConverter.toReview(request, member, restaurant);
 
         return reviewRepository.save(newReview);
+    }
+
+    @Override
+    public Page<Review> getRestaurantReviewList(Long restaurantId, Integer page) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+
+        Page<Review> RestaurantPage = reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page-1, 10, Sort.by("createdAt").descending()));
+        return RestaurantPage;
+    }
+
+    @Override
+    public Page<Review> getMemberReviewList(Long memberId, Integer page) {
+        Member member = memberRepository.findById(memberId).get();
+
+        Page<Review> MemberReviewPage = reviewRepository.findAllByMember(member, PageRequest.of(page-1, 10, Sort.by("createdAt").descending()));
+        return MemberReviewPage;
     }
 }
