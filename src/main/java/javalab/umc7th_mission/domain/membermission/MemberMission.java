@@ -11,14 +11,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import javalab.umc7th_mission.domain.common.BaseEntity;
+import javalab.umc7th_mission.domain.member.Member;
+import javalab.umc7th_mission.domain.mission.Mission;
+import javalab.umc7th_mission.domain.mission.MissionStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.umcjpaproject.domain.common.BaseEntity;
-import umc.umcjpaproject.domain.member.Member;
-import umc.umcjpaproject.domain.mission.Mission;
-import umc.umcjpaproject.domain.mission.MissionStatus;
 
 @Entity
 @Getter

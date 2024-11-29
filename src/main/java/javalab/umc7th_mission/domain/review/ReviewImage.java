@@ -10,10 +10,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import javalab.umc7th_mission.domain.common.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.umcjpaproject.domain.common.BaseEntity;
 
 @Getter
 @Entity
@@ -37,4 +37,5 @@ public class ReviewImage extends BaseEntity {
         this.imageUrl = imageUrl;
         this.review = review;
     }
+
 }

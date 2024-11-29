@@ -10,14 +10,19 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import java.time.LocalDate;
+import javalab.umc7th_mission.domain.common.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.umcjpaproject.domain.common.BaseEntity;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = PROTECTED)
+@DynamicUpdate
+@DynamicInsert
 public class Member extends BaseEntity {
 
     @Id
@@ -49,9 +54,10 @@ public class Member extends BaseEntity {
     @Enumerated(STRING)
     private SocialType socialType;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
 
     @Builder
