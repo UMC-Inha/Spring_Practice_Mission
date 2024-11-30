@@ -11,6 +11,7 @@ import javalab.umc7th_mission.study.apiPayload.ApiResponse;
 import javalab.umc7th_mission.study.converter.ReviewConverter;
 import javalab.umc7th_mission.study.domain.Review;
 import javalab.umc7th_mission.study.service.ReviewService.ReviewCommandService;
+import javalab.umc7th_mission.study.validation.annotation.CheckPage;
 import javalab.umc7th_mission.study.validation.annotation.ExistRestaurant;
 import javalab.umc7th_mission.study.web.dto.review.ReviewRequestDTO;
 import javalab.umc7th_mission.study.web.dto.review.ReviewResponseDTO;
@@ -41,7 +42,7 @@ public class ReviewRestController {
     @Parameters({
             @Parameter(name="storeId", description = "가게의 아이디, path variable 입니다!")
     })
-    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistRestaurant @PathVariable(name="storeId") Long storeId, @RequestParam(name="page") Integer page){
+    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistRestaurant @PathVariable(name="storeId") Long storeId, @CheckPage @RequestParam(name="page") Integer page){
         Page<Review> reviewList = reviewCommandService.getRestaurantReviewList(storeId, page);
         return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
     }

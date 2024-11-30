@@ -52,7 +52,7 @@ public class MemberMissionResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class CompletedResultDTO {
+    public static class ChangeCompletedMemberMissionResultDTO {
         Long memberMissionId;
         Long memberId;
         Long missionId;

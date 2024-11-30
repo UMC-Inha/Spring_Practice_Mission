@@ -49,7 +49,7 @@ public class MemberRestController {
     @Parameters({
             @Parameter(name="memberId", description = "멤버의 아이디, path variable 입니다!")
     })
-    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getMissionList(@Valid @CheckPage @PathVariable(name="memberId") Long memberId, @RequestParam(name="page") Integer page){
+    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getMissionList(@Valid @PathVariable(name="memberId") Long memberId, @CheckPage @RequestParam(name="page") Integer page){
         Page<Review> reviewPage = reviewCommandService.getMemberReviewList(memberId, page);
         return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewPage));
     }

@@ -8,6 +8,7 @@ import javalab.umc7th_mission.study.web.dto.member_mission.MemberMissionResponse
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,15 @@ public class MemberMissionConverter {
                 .totalElements(memberMissionlist.getTotalElements())
                 .listSize(memberMissionlist.getSize())
                 .challengingMissionList(challenginMissionList)
+                .build();
+    }
+
+    public static MemberMissionResponseDTO.ChangeCompletedMemberMissionResultDTO changeCompletedMemberMissionResultDTO(MemberMission memberMission){
+        return MemberMissionResponseDTO.ChangeCompletedMemberMissionResultDTO.builder()
+                .memberMissionId(memberMission.getId())
+                .memberId(memberMission.getMember().getId())
+                .missionId(memberMission.getMission().getId())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }
