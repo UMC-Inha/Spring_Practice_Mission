@@ -31,7 +31,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // MemberMission 관련
     MEMBER_MISSION_ALREADY_IN_PROGRESS(HttpStatus.BAD_REQUEST, "MEMBERMISSION4001", "이미 도전 중입니다"),
-
+    MEMBER_MISSION_NOT_IN_PROGRESS(HttpStatus.BAD_REQUEST, "MEMBERMISSION4002", "도전 중이지 않은 미션입니다."),
     // Store 관련
     STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE4001", "해당 가게가 존재하지 않습니다");
 

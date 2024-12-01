@@ -1,5 +1,7 @@
 package javalab.umc7th_mission.service.MemberMissionService;
 
+import javalab.umc7th_mission.apiPayload.code.status.ErrorStatus;
+import javalab.umc7th_mission.apiPayload.exception.GeneralException;
 import javalab.umc7th_mission.domain.Member;
 import javalab.umc7th_mission.domain.Mission;
 import javalab.umc7th_mission.domain.enums.MissionStatus;
@@ -9,6 +11,7 @@ import javalab.umc7th_mission.service.MemberService.MemberQueryService;
 import javalab.umc7th_mission.service.MissionService.MissionQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +32,15 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
                 .build();
 
         return memberMissionRepository.save(newMemberMission);
+    }
+
+    @Override
+    @Transactional
+    public MemberMission done(Long memberId, Long missionId) {
+        if (memberMissionRepository.updateStatusToDone(memberId, missionId) == 0) {
+            throw new GeneralException(ErrorStatus.MEMBER_MISSION_NOT_IN_PROGRESS);
+        }
+        return memberMissionRepository.findMemberMissionByMemberIdAndMissionId(memberId, missionId);
     }
 
     public Boolean isExist(Long memberId, Long missionId) {
