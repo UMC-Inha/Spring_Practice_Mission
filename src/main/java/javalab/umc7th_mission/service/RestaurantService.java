@@ -23,5 +23,8 @@ public class RestaurantService {
         return restaurant;
     }
 
+    public Restaurant findRestaurant(Long restaurantId) {
+        return restaurantRepository.findById(restaurantId).get();
+    }
 
 }

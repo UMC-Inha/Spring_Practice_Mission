@@ -11,6 +11,9 @@ import javalab.umc7th_mission.repository.RestaurantRepository;
 import javalab.umc7th_mission.repository.ReviewRepository;
 import javalab.umc7th_mission.web.dto.request.ReviewRequestDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,7 @@ public class ReviewService {
     private final RestaurantRepository restaurantRepository;
     private final MemberRepository memberRepository;
     private final ReviewConverter reviewConverter;
+    private final MemberService memberService;
 
     @Transactional
     public Review addReview(Long restaurantId, ReviewRequestDTO.AddReview request) {
@@ -37,5 +41,10 @@ public class ReviewService {
         restaurant.getReviewList().add(review);
 
         return review;
+    }
+
+    public Page<Review> getMyReview(Long memberId, Pageable pageable) {
+        Member member = memberService.findMember(memberId);
+        return reviewRepository.findAllByMember(member,pageable);
     }
 }
