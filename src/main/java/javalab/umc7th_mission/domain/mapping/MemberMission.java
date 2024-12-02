@@ -30,6 +30,7 @@ public class MemberMission {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, columnDefinition = "VARCHAR(10) DEFAULT 'NEW'")
+    @Setter
     private Status status;
 
     @Column(nullable = false)

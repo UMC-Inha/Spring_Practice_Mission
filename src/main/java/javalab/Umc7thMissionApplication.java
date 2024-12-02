@@ -1,4 +1,4 @@
-package javalab.umc7th_mission;
+package javalab;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
