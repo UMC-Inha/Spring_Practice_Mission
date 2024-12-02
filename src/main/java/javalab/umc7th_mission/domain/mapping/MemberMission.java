@@ -37,4 +37,11 @@ public class MemberMission extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MissionStatus status;
 
+    //도전 중 -> 도전 완료 상태 변경
+    public void complete() {
+        if(this.status != MissionStatus.CHALLENGING) {
+            throw new IllegalStateException("미션이 도전 중이 아닙니다.");
+        }
+        this.status = MissionStatus.COMPLETE;
+    }
 }

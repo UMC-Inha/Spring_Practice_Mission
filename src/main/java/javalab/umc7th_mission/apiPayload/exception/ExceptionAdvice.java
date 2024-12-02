@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
@@ -102,6 +103,26 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 body,
                 new HttpHeaders(),
                 ErrorStatus.REGION_NOT_FOUND.getHttpStatus(),
+                webRequest
+        );
+    }
+
+    //잘못된 페이지 입력 관련 오류 처리
+    @ExceptionHandler(InvalidPageException.class)
+    public ResponseEntity<Object> handlePositivePageException(ConstraintViolationException e, HttpServletRequest request) {
+        WebRequest webRequest = new ServletWebRequest(request);
+
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus.PAGE_OUT_OF_RANGE.getCode(),
+                ErrorStatus.PAGE_OUT_OF_RANGE.getMessage(),
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                new HttpHeaders(),
+                ErrorStatus.PAGE_OUT_OF_RANGE.getHttpStatus(),
                 webRequest
         );
     }

@@ -1,6 +1,14 @@
 package javalab.umc7th_mission.web.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MissionResponseDTO {
     public static class AddResultDTO {
@@ -20,5 +28,33 @@ public class MissionResponseDTO {
         public LocalDateTime getCreatedAt() {
             return createdAt;
         }
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreviewListDTO{
+        List<MissionResponseDTO.MissionPreviewDTO> missionList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirstPage;
+        Boolean isLastPage;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreviewDTO {
+
+        Long missionId;
+        String missionName;
+        String description;
+        Integer reward;
+        boolean isActive;
+        LocalDate startDate;
+        LocalDate endDate;
     }
 }
