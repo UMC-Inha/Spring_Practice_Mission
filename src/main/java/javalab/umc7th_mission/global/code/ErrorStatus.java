@@ -35,11 +35,15 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //
     USER_ALREADY_CHALLENGING_MISSION(HttpStatus.NOT_FOUND, "USERMISSION4001", "이미 유저가 미션을 도전하고 있습니다."),
-
+    USER_NOT_CHALLENGING_MISSION(HttpStatus.BAD_REQUEST, "USERMISSION4002", "도전중인 미션이 아닙니다."),
     //
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER4001", "유저가 존재하지 않습니다"),
+
+    //
+    PAGE_NOT_VALID(HttpStatus.BAD_REQUEST, "PAGE4001", "페이지 번호가 적절하지 않습니다"),
     // 예시,,,
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");
+
 
 
     private final HttpStatus httpStatus;
