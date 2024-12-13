@@ -2,6 +2,8 @@ package umc.spring.service.ReviewService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.GeneralException;
@@ -51,5 +53,21 @@ public class ReviewService {
                 .storeId(store.getId())
                 .memberId(member.getId())
                 .build();
+    }
+
+    // 내가 작성한 리뷰 목록 조회
+    public Page<ReviewResponseDTO> getMyReviews(Long memberId, Integer page, Integer size) {
+        // 페이징 처리 (PageRequest 생성)
+        PageRequest pageable = PageRequest.of(page, size);
+
+        // 리뷰 조회 및 DTO 변환
+        return reviewRepository.findByMemberId(memberId, pageable)
+                .map(review -> ReviewResponseDTO.builder()
+                        .id(review.getId())
+                        .title(review.getTitle())
+                        .score(review.getScore())
+                        .storeId(review.getStore().getId())
+                        .memberId(review.getMember().getId())
+                        .build());
     }
 }
